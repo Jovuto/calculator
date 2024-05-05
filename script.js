@@ -21,3 +21,11 @@ function multiply (...numbers) {
     }
     return multArr.reduce((sum, currentNum) => sum * currentNum);
 }
+
+function divide (...numbers) {
+    let divArr = [];
+    for (number of numbers){
+        divArr.push(number);
+    }
+    return divArr.reduce((sum, currentNum) => sum / currentNum);
+}
