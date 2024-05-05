@@ -33,3 +33,18 @@ function divide (...numbers) {
     }
     return divArr.reduce((sum, currentNum) => sum / currentNum);
 }
+
+function operate (operator, firstNumber, secondNumber) {
+    switch (operator) {
+        case "+":
+            return add(firstNumber, secondNumber);
+        case "-":
+            return subtract(firstNumber, secondNumber);
+        case "*":
+            return multiply(firstNumber, secondNumber);
+        case "/":
+            return divide(firstNumber, secondNumber);
+        default:
+            console.error("Operator not recognised")
+    }
+}
