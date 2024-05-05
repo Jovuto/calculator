@@ -1,0 +1,31 @@
+html {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator {
+    background-color: rgb(69, 69, 69);
+    border-radius: 10%;
+    height: 700px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.display {
+    background-color: rgb(203, 252, 203);
+    align-self: stretch;
+    height: 100px;
+    margin: 75px 50px;
+    border-radius: 20px;
+}
+
