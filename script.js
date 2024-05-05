@@ -1,3 +1,7 @@
+let firstNumber;
+let operator;
+let secondNumber;
+
 function add (...numbers) {
     let sum = 0;
     for (number of numbers) {
