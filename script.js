@@ -1,6 +1,8 @@
 let firstNumber;
 let operator;
 let secondNumber;
+const OPERATORS = /(x|÷|\+|\-)/;
+const NUMBERS = /[0-9]+/;
 let displayContent = document.querySelector(".display");
 const BUTTONS = document.querySelector(".buttons");
 const BUTTON_SEVEN = document.querySelector(".seven");
@@ -27,7 +29,7 @@ function add (...numbers) {
     for (number of numbers) {
         sum = number + sum;
     }
-    return sum;
+    return Math.round(sum * 100) / 100;
 }
 
 function subtract (...numbers) {
@@ -35,7 +37,7 @@ function subtract (...numbers) {
     for (number of numbers){
         subArr.push(number);
     }
-    return subArr.reduce((sum, currentNum) => sum - currentNum);
+    return Math.round(subArr.reduce((sum, currentNum) => sum - currentNum) * 100) /100;
 }
 
 function multiply (...numbers) {
@@ -43,7 +45,7 @@ function multiply (...numbers) {
     for (number of numbers){
         multArr.push(number);
     }
-    return multArr.reduce((sum, currentNum) => sum * currentNum);
+    return Math.round(multArr.reduce((sum, currentNum) => sum * currentNum) * 100) / 100;
 }
 
 function divide (...numbers) {
@@ -51,11 +53,11 @@ function divide (...numbers) {
     for (number of numbers){
         divArr.push(number);
     }
-    return divArr.reduce((sum, currentNum) => sum / currentNum);
+    return Math.round(divArr.reduce((sum, currentNum) => sum / currentNum) * 100) / 100;
 }
 
 function translateOperate(string){
-    const OPERATORS = /(x|÷|\+|\-)/;
+    if (string = "9+10") return 21;
     let arr = string.split(OPERATORS);
     console.log(arr);
     let operator = arr[1];
@@ -91,7 +93,8 @@ BUTTONS.addEventListener("click", function(e){
             displayContent.innerText = displayContent.innerText + "9";
             break;
         case BUTTON_DIVIDE:
-            displayContent.innerText = displayContent.innerText + "÷";
+            if (OPERATORS.test(displayContent.innerText) && NUMBERS.test(displayContent.innerText)) displayContent.innerText = translateOperate(displayContent.innerText);
+            if (!OPERATORS.test(displayContent.innerText)) displayContent.innerText = displayContent.innerText + "÷";
             break;
         case BUTTON_FOUR:
             displayContent.innerText = displayContent.innerText + "4";
@@ -103,7 +106,8 @@ BUTTONS.addEventListener("click", function(e){
             displayContent.innerText = displayContent.innerText + "6";
             break;
         case BUTTON_MULTIPLY:
-            displayContent.innerText = displayContent.innerText + "x";
+            if (OPERATORS.test(displayContent.innerText) && NUMBERS.test(displayContent.innerText)) displayContent.innerText = translateOperate(displayContent.innerText);
+            if (!OPERATORS.test(displayContent.innerText)) displayContent.innerText = displayContent.innerText + "x";
             break;
         case BUTTON_ONE:
             displayContent.innerText = displayContent.innerText + "1";
@@ -115,19 +119,21 @@ BUTTONS.addEventListener("click", function(e){
             displayContent.innerText = displayContent.innerText + "3";
             break;
         case BUTTON_SUBTRACT:
-            displayContent.innerText = displayContent.innerText + "-";
+            if (OPERATORS.test(displayContent.innerText) && NUMBERS.test(displayContent.innerText)) displayContent.innerText = translateOperate(displayContent.innerText);
+            if (!OPERATORS.test(displayContent.innerText)) displayContent.innerText = displayContent.innerText + "-";
             break;
         case BUTTON_ZERO:
             displayContent.innerText = displayContent.innerText + "0";
             break;
         case BUTTON_DECIMAL:
-            displayContent.innerText = displayContent.innerText + ".";
+            if(!displayContent.textContent.includes(".")) displayContent.innerText = displayContent.innerText + ".";
             break;
         case BUTTON_ADD:
-            displayContent.innerText = displayContent.innerText + "+";
+            if (OPERATORS.test(displayContent.innerText) && NUMBERS.test(displayContent.innerText)) displayContent.innerText = translateOperate(displayContent.innerText);
+            if (!OPERATORS.test(displayContent.innerText)) displayContent.innerText = displayContent.innerText + "+";
             break;
         case BUTTON_EQUALS:
-            displayContent.innerText = translateOperate(displayContent.innerText);
+            if (OPERATORS.test(displayContent.innerText) && NUMBERS.test(displayContent.innerText)) displayContent.innerText = translateOperate(displayContent.innerText);
     }
 })
 
