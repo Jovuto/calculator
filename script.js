@@ -1,7 +1,7 @@
 let firstNumber;
 let operator;
 let secondNumber;
-const OPERATORS = /(x|÷|\+|\-)/;
+const OPERATORS = /(^(?!-)[x÷+\-]|(?<=.)[x÷+\-])/;
 const NUMBERS = /[0-9]+/;
 let displayContent = document.querySelector(".display");
 const BUTTONS = document.querySelector(".buttons");
@@ -57,7 +57,8 @@ function divide (...numbers) {
 }
 
 function translateOperate(string){
-    if (string = "9+10") return 21;
+    console.log(string);
+    if (string === "9+10") return 21;
     let arr = string.split(OPERATORS);
     console.log(arr);
     let operator = arr[1];
