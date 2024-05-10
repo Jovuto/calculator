@@ -54,15 +54,25 @@ function divide (...numbers) {
     return divArr.reduce((sum, currentNum) => sum / currentNum);
 }
 
+function translateOperate(string){
+    const OPERATORS = /(x|÷|\+|\-)/;
+    let arr = string.split(OPERATORS);
+    console.log(arr);
+    let operator = arr[1];
+    let firstNumber = +arr[0];
+    let secondNumber = +arr[2];
+    return operate(operator, firstNumber, secondNumber);
+}
+
 function operate (operator, firstNumber, secondNumber) {
     switch (operator) {
         case "+":
             return add(firstNumber, secondNumber);
         case "-":
             return subtract(firstNumber, secondNumber);
-        case "*":
+        case "x":
             return multiply(firstNumber, secondNumber);
-        case "/":
+        case "÷":
             return divide(firstNumber, secondNumber);
         default:
             console.error("Operator not recognised")
@@ -116,6 +126,8 @@ BUTTONS.addEventListener("click", function(e){
         case BUTTON_ADD:
             displayContent.innerText = displayContent.innerText + "+";
             break;
+        case BUTTON_EQUALS:
+            displayContent.innerText = translateOperate(displayContent.innerText);
     }
 })
 
